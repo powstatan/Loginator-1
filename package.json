@@ -3,8 +3,9 @@
   "version": "2.0.0",
   "dependencies": {},
   "main": "index.js",
-  "scripts": {
-    "index.run.js"
+    "scripts": {
+    "start": "node index.run.js"
+    },
   },
   "devDependencies": {
     "estraverse": "~4.1.0",
