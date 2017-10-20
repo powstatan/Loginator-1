@@ -2,8 +2,9 @@
   "name": "loginator",
   "version": "2.0.0",
   "dependencies": {},
-  "main": "index.run.js",
+  "main": "index.js",
   "scripts": {
+    "index.run.js"
   },
   "devDependencies": {
     "estraverse": "~4.1.0",
