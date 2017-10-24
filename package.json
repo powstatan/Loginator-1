@@ -4,7 +4,7 @@
    "dependencies": {},
    "scripts": {
      "test": "gulp serve",
-"start": "gulp build"
+"start": "heroku open"
    },
    "devDependencies": {
      "estraverse": "~4.1.0",
