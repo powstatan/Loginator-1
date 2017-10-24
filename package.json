@@ -4,7 +4,7 @@
    "dependencies": {},
    "scripts": {
      "test": "gulp serve",
-"start": "gulp.start('build')"
+"start": "gulp-run"
    },
    "devDependencies": {
      "estraverse": "~4.1.0",
