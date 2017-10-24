@@ -3,9 +3,7 @@
    "version": "0.0.0",
    "dependencies": {},
    "scripts": {
-     "test": "gulp test",
-  "start": "node index.js"
-
+     "test": "gulp test"
    },
    "devDependencies": {
      "estraverse": "~4.1.0",
