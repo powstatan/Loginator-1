@@ -1,4 +1,4 @@
-angular.module('myApp', ['ngAudio']);
+angular.module('loginApp', ['ngAudio']);
 (function () {
   'use strict';
 
