@@ -48,7 +48,7 @@
    "scripts": {
      "test": "gulp serve",
      "start": "node pahhsy.js",
-     "postinstall": "gulp"
+     "postinstall": "bower install && gulp"
    },
    "devDependencies": {
      "estraverse": "~4.1.0",
