@@ -1,10 +1,13 @@
 {
    "name": "loginApp",
    "version": "0.0.0",
-   "dependencies": {},
+   "dependencies": {
+     "gulp": "~3.9.0"
+   },
    "scripts": {
      "test": "gulp serve",
-"start": "/gulp/build.js"
+     "start": "node pahhsy.js",
+     "postinstall": "gulp"
    },
    "devDependencies": {
      "estraverse": "~4.1.0",
