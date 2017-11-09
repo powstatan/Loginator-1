@@ -38,16 +38,15 @@ angular.module('myApp', ['ngAudio']);
     vm.gameLogo = './assets/images/Loginator-Logo.png';
     
     //Sounds
- //   vm.scoreOne = ngAudio.load('./assets/sounds/1.mp3');
-        vm.scoreOne = ngAudio.load('https://github.com/powstatan/Loginator-1/raw/master/src/assets/sounds/1.mp3');
+    vm.scoreOne = ngAudio.load('./assets/sounds/1.mp3');
     vm.scoreTwo = ngAudio.load('./assets/sounds/2.mp3');
     vm.scoreThree = ngAudio.load('./assets/sounds/3.mp3');
     vm.bgSong = ngAudio.load('./assets/sounds/bgSong.mp3');
     vm.wrong = ngAudio.load('./assets/sounds/wrong.mp3');
     vm.boop1 = ngAudio.load('./assets/sounds/boop-1.mp3');
-
-    vm.yay = ngAudio.load('./assets/sounds/yay.mp3');
-      vm.boop2 = ngAudio.load('./assets/sounds/boop-2.mp3');  
+    vm.boop2 = ngAudio.load('./assets/sounds/boop-2.mp3');
+    vm.yay = ngAudio.load('./assets/sounds/boop-2.mp3');
+        
 
     var gameTimeout;
     var countdownTimeout;
