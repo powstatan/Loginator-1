@@ -7,7 +7,7 @@ angular.module('myApp', ['ngAudio']);
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, $state, dataService, credentialService, ngAudio) {
+  function MainController($timeout, $state, dataService, credentialService, ngAudio, SoundService) {
 
     //display variables
     var vm = this;
@@ -32,21 +32,69 @@ angular.module('myApp', ['ngAudio']);
     vm.realPW = credentialService.credentials.pw;
     vm.timeRemaining = credentialService.credentials.tm;
     vm.localCredCheck = localCredCheck;
-    
+
     //Images
     vm.monster = './assets/images/monster-standing.png';
     vm.gameLogo = './assets/images/Loginator-Logo.png';
-    
+
     //Sounds
-    vm.scoreOne = ngAudio.load('./assets/sounds/1.mp3');
-    vm.scoreTwo = ngAudio.load('./assets/sounds/2.mp3');
-    vm.scoreThree = ngAudio.load('./assets/sounds/3.mp3');
-    vm.bgSong = ngAudio.load('./assets/sounds/bgSong.mp3');
-    vm.wrong = ngAudio.load('./assets/sounds/wrong.mp3');
-    vm.boop1 = ngAudio.load('./assets/sounds/boop-1.mp3');
-    vm.boop2 = ngAudio.load('./assets/sounds/boop-2.mp3');
-    vm.yay = ngAudio.load('./assets/sounds/yay.mp3');
-        
+    vm.sounds = {};
+
+
+    vm.sounds.bgSong = ngAudio.load('./assets/sounds/bgSong.mp3');
+
+
+    function playSound(name) {
+      SoundService.getSound(name).start();
+    }
+
+    SoundService.loadSound({
+      name: 'scoreOne',
+      src: './assets/sounds/1.mp3'
+    }).then(function (sound) {
+      vm.sounds.scoreOne = sound;
+    });
+    SoundService.loadSound({
+      name: 'scoreTwo',
+      src: './assets/sounds/2.mp3'
+    }).then(function (sound) {
+      vm.sounds.scoreTwo = sound;
+    });
+    SoundService.loadSound({
+      name: 'scoreThree',
+      src: './assets/sounds/3.mp3'
+    }).then(function (sound) {
+      vm.sounds.scoreThree = sound;
+    });
+    SoundService.loadSound({
+      name: 'wrong',
+      src: './assets/sounds/wrong.mp3'
+    }).then(function (sound) {
+      vm.sounds.wrong = sound;
+    });
+    SoundService.loadSound({
+      name: 'boop1',
+      src: './assets/sounds/boop-1.mp3'
+    }).then(function (sound) {
+      vm.sounds.boop1 = sound;
+    });
+    SoundService.loadSound({
+      name: 'boop2',
+      src: './assets/sounds/boop-2.mp3'
+    }).then(function (sound) {
+      vm.sounds.boop2 = sound;
+    });
+    SoundService.loadSound({
+      name: 'yay',
+      src: './assets/sounds/yay.mp3'
+    }).then(function (sound) {
+      vm.sounds.yay = sound;
+    });
+
+
+
+
+
 
     var gameTimeout;
     var countdownTimeout;
@@ -72,7 +120,8 @@ angular.module('myApp', ['ngAudio']);
         }
         vm.streak = 0;
         usernameElement.focus();
-        vm.wrong.play();
+        //vm.sounds.wrong.start();
+        playSound('wrong');
         vm.username = "";
         vm.addScore = 0;
       }
@@ -84,7 +133,7 @@ angular.module('myApp', ['ngAudio']);
         if (angular.lowercase(vm.password) == vm.realPW) {
           vm.userMessage = "Is your capslock on?";
         }
-        vm.wrong.play();
+        playSound('wrong');
         passwordElement.addClass('invalid');
 
         if (vm.username == vm.realUN) {
@@ -114,15 +163,15 @@ angular.module('myApp', ['ngAudio']);
         vm.score += vm.addScore;
         vm.twoSecs = 2;
         if (vm.addScore == 100){
-            vm.scoreOne.play();
+            playSound('scoreOne');
         }
         else if (vm.addScore == 200){
-            vm.scoreOne.stop();
-            vm.scoreTwo.play();
+            vm.sounds.scoreOne.stop();
+            playSound('scoreTwo');
         }
         else {
-            vm.scoreTwo.stop();
-            vm.scoreThree.play();
+            vm.sounds.scoreTwo.stop();
+            playSound('scoreThree');
         }
         vm.streak++;
         twoSecondMessages();
@@ -138,7 +187,7 @@ angular.module('myApp', ['ngAudio']);
 
     //SUCCESS MESSAGE TIMER
     function twoSecondMessages() {
-   
+
       vm.multiplierMessage = '+' + vm.addScore;
       vm.monster = './assets/images/monster-jumping.png';
       if (vm.twoSecs > 1) {
@@ -159,13 +208,15 @@ angular.module('myApp', ['ngAudio']);
 
     function onCountdownTimeout() {
       if (vm.countDownRemaining > 1) {
-        vm.boop1.play();
+        //vm.sounds.boop1.start();
+        playSound('boop1');
         vm.countDownRemaining--;
         console.log(vm.countDownRemaining);
         countdownTimeout = $timeout(onCountdownTimeout, 1000);
       } else {
         vm.countDownRemaining = "GO!";
-        vm.boop2.play();
+        //vm.sounds.boop2.start();
+        playSound('boop2');
         $timeout(startGameTimer, 1500);
         stopCountdownTimer();
       }
@@ -178,7 +229,7 @@ angular.module('myApp', ['ngAudio']);
     //GAME TIMER
     function startGameTimer() {
       vm.gameStarted = true;
-      vm.bgSong.play();
+      vm.sounds.bgSong.play();
       usernameElement.focus();
       gameTimeout = $timeout(onTimeout, 1000);
     }
@@ -188,20 +239,23 @@ angular.module('myApp', ['ngAudio']);
           timeTextElement.addClass('blink_text');
           }
       if (vm.timeRemaining > 0) {
-        
+
         vm.timeRemaining--;
         if(vm.timeRemaining ==0) {
-          vm.boop2.play();
+          //vm.sounds.boop2.start();
+          playSound('boop2');
         }
           else if(vm.timeRemaining <= 3) {
-          vm.boop1.play();
+          //vm.sounds.boop1.start();
+          playSound('boop1');
         }
         gameTimeout = $timeout(onTimeout, 1000);
       } else {
         stopTimer();
         dataService.setHighScore(vm.score).then(function(){
-          vm.bgSong.stop();
-          vm.yay.play();
+          vm.sounds.bgSong.stop();
+          //vm.sounds.yay.start();
+          playSound('yay');
           $state.go('gameover');
         });
       }
@@ -217,10 +271,10 @@ angular.module('myApp', ['ngAudio']);
       dataService.gameScore = 0;
       dataService.getHighScore().then(function(highScore){
         vm.highScore = dataService.highScore;
-        vm.boop1.play();        
+        //vm.sounds.boop1.start();
+        playSound('boop1');
         startCountdownTimer();
       });
     }
   }
 })();
-
