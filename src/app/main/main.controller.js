@@ -45,7 +45,7 @@ angular.module('myApp', ['ngAudio']);
     vm.wrong = ngAudio.load('./assets/sounds/wrong.mp3');
     vm.boop1 = ngAudio.load('./assets/sounds/boop-1.mp3');
     vm.boop2 = ngAudio.load('./assets/sounds/boop-2.mp3');
-    vm.yay = ngAudio.load('./assets/sounds/boop-2.mp3');
+    vm.yay = ngAudio.load('./assets/sounds/yay.mp3');
         
 
     var gameTimeout;
