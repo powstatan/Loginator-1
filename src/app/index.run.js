@@ -8,7 +8,7 @@
   /** @ngInject */
   function runBlock($log) {
 
-    $log.debug('runBlock');
+    $log.debug('runBlock end');
     $(document).foundation();
   }
 
