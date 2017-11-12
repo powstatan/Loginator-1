@@ -12,7 +12,7 @@ angular.module('myApp', ['ngAudio']);
     //display variables
     var vm = this;
 
-    vm.highScore = dataService.highScore;
+   // vm.highScore = dataService.highScore;
     vm.score = 0;
     vm.nextPointValue = 100;
     vm.countDownRemaining = 3;
@@ -38,7 +38,7 @@ angular.module('myApp', ['ngAudio']);
     vm.gameLogo = './assets/images/Loginator-Logo.png';
     
     //Sounds
-    vm.scoreOne = ngAudio.load('./assets/sounds/1.mp3');
+    vm.scoreOne = ngAudio.load('https://github.com/powstatan/Loginator-1/raw/master/src/assets/sounds/1.mp3');
     vm.scoreTwo = ngAudio.load('./assets/sounds/2.mp3');
     vm.scoreThree = ngAudio.load('./assets/sounds/3.mp3');
     vm.bgSong = ngAudio.load('./assets/sounds/bgSong.mp3');
@@ -46,11 +46,11 @@ angular.module('myApp', ['ngAudio']);
     vm.boop1 = ngAudio.load('./assets/sounds/boop-1.mp3');
     vm.boop2 = ngAudio.load('./assets/sounds/boop-2.mp3');
     vm.yay = ngAudio.load('./assets/sounds/yay.mp3');
-        
+    
 
     var gameTimeout;
     var countdownTimeout;
-    var twoSecsTimeout;
+    var twoSecsTimeout = 0;
     var usernameElement = angular.element(document.querySelector('#mainUNField'));
     var passwordElement = angular.element(document.querySelector('#mainPWField'));
     var timeTextElement = angular.element(document.querySelector('#timeText'));
